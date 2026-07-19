@@ -34,6 +34,8 @@ if st.button("Predict"):
         "listed_in": [listed_in]
     })
 
+    st.write(sample.columns.tolist())
+    st.write(sample)
     sample_processed = preprocessor.transform(sample)
 
     prediction = model.predict(sample_processed)
