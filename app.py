@@ -1,12 +1,14 @@
 import streamlit as st
-import pandas as pd
 import joblib
+import pandas as pd
 
-# Load model and preprocessor
+# Load model
 model = joblib.load("model(netflix).pkl")
 preprocessor = joblib.load("preprocessor(netflix).pkl")
 
-st.title("Netflix Content Classifier")
+st.title("Netflix Recommendation Model")
+
+st.write("Enter Movie Information")
 
 # User Inputs
 type_ = st.selectbox("Type", ["Movie", "TV Show"])
@@ -16,7 +18,7 @@ country = st.text_input("Country", "India")
 release_year = st.number_input(
     "Release Year",
     min_value=1900,
-    max_value=2035,
+    max_value=2030,
     value=2020
 )
 
@@ -34,10 +36,8 @@ if st.button("Predict"):
         "listed_in": [listed_in]
     })
 
-    st.write(sample.columns.tolist())
-    st.write(sample)
-    sample_processed = preprocessor.transform(sample)
+    prediction_data = preprocessor.transform(sample)
 
-    prediction = model.predict(sample_processed)
+    prediction = model.predict(prediction_data)
 
     st.success(f"Prediction: {prediction[0]}")
