@@ -45,4 +45,4 @@ jobs:
           python test_model.py
 
       - name: CI Passed
-        run: echo "Netflix Recommendation CI Passed Successfully!"assed Successfully!"
+        run: echo "Netflix Recommendation CI Passed Successfully!"
