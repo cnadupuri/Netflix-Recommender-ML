@@ -16,35 +16,33 @@ jobs:
 
     steps:
 
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.11"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    - name: Upgrade pip
-      run: |
-        python -m pip install --upgrade pip
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip
 
-    - name: Install Dependencies
-      run: |
-        pip install -r requirements.txt
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
 
-    - name: Verify Project Files
-      run: |
-        ls -la
+      - name: Display Project Files
+        run: ls -R
 
-    - name: Check Model Files
-      run: |
-        test -f "model(netflix).pkl"
-        test -f "preprocessor(netflix).pkl"
+      - name: Verify Model Files
+        run: |
+          test -f "model(netflix).pkl"
+          test -f "preprocessor(netflix).pkl"
 
-    - name: Check README
-      run: |
-        test -f README.md
+      - name: Run Tests
+        run: |
+          python test_model.py
 
-    - name: Success Message
-      run: |
-        echo "Netflix Recommendation Model CI Passed Successfully!"
+      - name: CI Passed
+        run: echo "Netflix Recommendation CI Passed Successfully!"assed Successfully!"
