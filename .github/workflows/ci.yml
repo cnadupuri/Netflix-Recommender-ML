@@ -1,32 +1,50 @@
-name: Netflix CI
+name: Netflix CI Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+    - name: Checkout Repository
+      uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
 
-      - name: Verify model files
-        run: |
-          test -f "model(netflix).pkl"
-          test -f "preprocessor(netflix).pkl"
+    - name: Upgrade pip
+      run: |
+        python -m pip install --upgrade pip
 
-      - name: Success
-        run: echo "CI Pipeline Passed!"
+    - name: Install Dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Verify Project Files
+      run: |
+        ls -la
+
+    - name: Check Model Files
+      run: |
+        test -f "model(netflix).pkl"
+        test -f "preprocessor(netflix).pkl"
+
+    - name: Check README
+      run: |
+        test -f README.md
+
+    - name: Success Message
+      run: |
+        echo "Netflix Recommendation Model CI Passed Successfully!"
