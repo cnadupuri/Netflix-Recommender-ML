@@ -44,11 +44,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t nadupuri/netflix-recommender:latest .
+          docker build -t nadupuri/netflix-recommendation:latest .
 
       - name: Push Docker Image
         run: |
-          docker push nadupuri/netflix-recommender:latest
+          docker push nadupuri/netflix-recommendation:latest
 
       - name: Success
         run: echo "CI/CD Pipeline Completed Successfully!"
