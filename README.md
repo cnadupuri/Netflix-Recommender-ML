@@ -231,6 +231,21 @@ GitHub:
 https://github.com/YOUR_GITHUB_USERNAME
 
 ---
+## Home Page
+
+![Home](images/home.png)
+
+## Prediction Result
+
+![Prediction](images/prediction.png)
+
+## GitHub Actions
+
+![GitHub Actions](images/github-actions.png)
+
+## Render Deployment
+
+![Render](images/render.png)
 
 # ⭐ Support
 
