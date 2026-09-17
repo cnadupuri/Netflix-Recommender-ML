@@ -228,7 +228,7 @@ The pipeline automatically performs:
 **Chaitanya**
 
 GitHub:
-https://github.com/YOUR_GITHUB_USERNAME
+https://github.com/cnadupuri
 
 ---
 ## Home Page
