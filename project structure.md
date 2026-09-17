@@ -22,6 +22,17 @@ subgraph group_delivery["Build &amp; Delivery"]
   node_render["Render Service<br/>container host"]
 end
 
+subgraph group_links["Repository File Links"]
+  link_app(["🔗 Open app.py"])
+  link_preprocessor(["🔗 Open preprocessor(netflix).pkl"])
+  link_model(["🔗 Open model(netflix).pkl"])
+  link_requirements(["🔗 Open requirements.txt"])
+  link_dockerfile(["🔗 Open Dockerfile"])
+  link_ci(["🔗 Open build-and-test.yml"])
+  link_delivery(["🔗 Open ci.yml"])
+  link_tests(["🔗 Open test_model.py"])
+end
+
 node_browser -->|"submits inputs"| node_streamlit_app
 node_streamlit_app -->|"transforms inputs"| node_preprocessor
 node_preprocessor -->|"produces features"| node_model
@@ -40,22 +51,31 @@ node_delivery_workflow -->|"pushes image"| node_docker_hub
 node_docker_hub -->|"supplies image"| node_render
 node_render -.->|"hosts containerized service"| node_streamlit_app
 
-click node_streamlit_app "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/app.py"
-click node_preprocessor "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/preprocessor(netflix).pkl"
-click node_model "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/model(netflix).pkl"
-click node_dependencies "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/requirements.txt"
-click node_dockerfile "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/Dockerfile"
-click node_ci_workflow "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/.github/workflows/build-and-test.yml"
-click node_delivery_workflow "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/.github/workflows/ci.yml"
-click node_model_test "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/test_model.py"
+node_streamlit_app -.-> link_app
+node_preprocessor -.-> link_preprocessor
+node_model -.-> link_model
+node_dependencies -.-> link_requirements
+node_dockerfile -.-> link_dockerfile
+node_ci_workflow -.-> link_ci
+node_delivery_workflow -.-> link_delivery
+node_model_test -.-> link_tests
 
-classDef toneNeutral fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
+click link_app "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/app.py" "Open Streamlit application"
+click link_preprocessor "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/preprocessor(netflix).pkl" "Open feature preprocessor"
+click link_model "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/model(netflix).pkl" "Open recommendation model"
+click link_requirements "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/requirements.txt" "Open dependencies"
+click link_dockerfile "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/Dockerfile" "Open Dockerfile"
+click link_ci "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/.github/workflows/build-and-test.yml" "Open validation workflow"
+click link_delivery "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/.github/workflows/ci.yml" "Open delivery workflow"
+click link_tests "https://github.com/cnadupuri/netflix-recommender-ml/blob/main/test_model.py" "Open model tests"
+
 classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
 classDef toneAmber fill:#fef3c7,stroke:#d97706,stroke-width:1.5px,color:#78350f
-classDef toneMint fill:#dcfce7,stroke:#16a34a,stroke-width:1.5px,color:#14532d
-classDef toneRose fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
-classDef toneIndigo fill:#e0e7ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
-classDef toneTeal fill:#ccfbf1,stroke:#0f766e,stroke-width:1.5px,color:#134e4a
+classDef toneButton fill:#2563eb,stroke:#1e3a8a,stroke-width:2px,color:#ffffff,font-weight:bold
 class node_browser,node_streamlit_app,node_preprocessor,node_model,node_prediction,node_dependencies toneBlue
 class node_dockerfile,node_source_push,node_ci_workflow,node_delivery_workflow,node_model_test,node_docker_hub,node_render toneAmber
+class link_app,link_preprocessor,link_model,link_requirements,link_dockerfile,link_ci,link_delivery,link_tests toneButton
+style group_inference fill:#eaf2ff,stroke:#60a5fa,stroke-width:1.5px,color:#0f172a
+style group_delivery fill:#fff7ed,stroke:#f59e0b,stroke-width:1.5px,color:#7c2d12
+style group_links fill:#f8fafc,stroke:#94a3b8,stroke-width:1.5px,color:#0f172a
 ```
